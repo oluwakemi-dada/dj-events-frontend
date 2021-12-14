@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import styles from '../styles/Footer.module.css';
+import styles from '@/styles/Footer.module.css';
 
 const Footer: NextPage = () => {
   const d: Date = new Date();

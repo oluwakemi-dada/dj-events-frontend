@@ -17,3 +17,5 @@ export interface Event {
   description: string;
   image?: string;
 }
+
+export type DeleteEvent = () => void;

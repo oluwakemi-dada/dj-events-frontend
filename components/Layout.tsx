@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter, NextRouter } from 'next/router';
 import { LayoutProps } from '../types';
 import Header from './Header';
 import Footer from './Footer';
+import Showcase from './Showcase';
 import styles from '@/styles/Layout.module.css';
 
 const Layout: NextPage<LayoutProps> = ({
@@ -11,6 +13,8 @@ const Layout: NextPage<LayoutProps> = ({
   description,
   children,
 }) => {
+  const router: NextRouter = useRouter();
+
   return (
     <div>
       <Head>
@@ -19,6 +23,7 @@ const Layout: NextPage<LayoutProps> = ({
         <meta name='keywords' content={keywords} />
       </Head>
       <Header />
+      {router.pathname === '/' && <Showcase />}
       <div className={styles.container}>{children}</div>
       <Footer />
     </div>

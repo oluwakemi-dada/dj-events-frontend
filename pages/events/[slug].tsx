@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 const EventPage: NextPage = () => {
   return (
     <Layout>
-      <h1>rrr</h1>
+      <h1>My Event</h1>
     </Layout>
   );
 };

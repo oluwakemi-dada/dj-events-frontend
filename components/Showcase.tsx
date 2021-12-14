@@ -1,7 +1,7 @@
-import type { NextPage } from 'next';
+import { FC } from 'react';
 import styles from '@/styles/Showcase.module.css';
 
-const Showcase: NextPage = () => {
+const Showcase: FC = () => {
   return (
     <div className={styles.showcase}>
       <h1>Welcome To The Party!</h1>

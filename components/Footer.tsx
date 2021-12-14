@@ -1,8 +1,8 @@
-import type { NextPage } from 'next';
+import { FC } from 'react';
 import Link from 'next/link';
 import styles from '@/styles/Footer.module.css';
 
-const Footer: NextPage = () => {
+const Footer: FC = () => {
   const d: Date = new Date();
   return (
     <footer className={styles.footer}>

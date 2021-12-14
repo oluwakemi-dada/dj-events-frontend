@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
+import Layout from '../../components/Layout';
 
 const AddEventPage: NextPage = () => {
   return (
-    <div>
+    <Layout title='Add New Event'>
       <h1>Add Event</h1>
-    </div>
+    </Layout>
   );
 };
 

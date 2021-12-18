@@ -26,12 +26,12 @@ const HomePage: NextPage<{ events: Event[] }> = ({ events }) => {
 export default HomePage;
 
 export const getStaticProps = async () => {
-  const res: Response = await fetch(`${API_URL}/api/events`);
+  const res: Response = await fetch(`${API_URL}/events?_sort=date:ASC&_limit=3`);
 
   const events: Event[] = await res.json();
 
   return {
-    props: { events: events.slice(0, 3) },
+    props: { events },
     revalidate: 1,
   };
 };

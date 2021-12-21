@@ -1,3 +1,5 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,10 +9,25 @@ import { API_URL } from '@/config/index';
 import { Event } from 'types';
 import styles from '@/styles/Event.module.css';
 import { DeleteEvent } from 'types';
+import { useRouter, NextRouter } from 'next/router';
 
 const EventPage: NextPage<{ evt: Event }> = ({ evt }) => {
-  const deleteEvent: DeleteEvent = () => {
-    console.log('Delete');
+  const router = useRouter();
+
+  const deleteEvent: DeleteEvent = async () => {
+    if (confirm('Are you sure?')) {
+      const res = await fetch(`${API_URL}/events/${evt.id}`, {
+        method: 'DELETE',
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message);
+      } else {
+        router.push('/events');
+      }
+    }
   };
 
   return (
@@ -31,6 +48,7 @@ const EventPage: NextPage<{ evt: Event }> = ({ evt }) => {
           {new Date(evt.date).toLocaleDateString('en-US')} at {evt.time}
         </span>
         <h1>{evt.name}</h1>
+        <ToastContainer />
         {evt.image && (
           <div className={styles.image}>
             <Image

@@ -4,7 +4,8 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/styles/*": ["styles/*"],
-      "@/config/*": ["config/*"]
+      "@/config/*": ["config/*"],
+      "@/utils/*": ["utils/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -25,7 +26,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/api/events/index.js"
+    "pages/api/events/index.js",
+    "pages/_document.tsx"
   ],
   "exclude": ["node_modules"]
 }

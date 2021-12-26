@@ -1,3 +1,4 @@
+import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { FC } from 'react';
 import Link from 'next/link';
 import Search from './Search';
@@ -24,6 +25,14 @@ const Header: FC = () => {
           <li>
             <Link href='/events/add'>
               <a>Add Event</a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/account/login'>
+              <a className='btn-secondary btn-icon'>
+                {' '}
+                <FaSignInAlt /> Login
+              </a>
             </Link>
           </li>
         </ul>

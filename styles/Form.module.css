@@ -8,11 +8,6 @@
   padding: 5px;
 }
 
-.form input:focus {
-  outline: 0;
-  border: 1px solid red;
-}
-
 .form textarea {
   padding: 5px;
   width: 100%;

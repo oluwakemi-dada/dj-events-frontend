@@ -70,3 +70,8 @@ h1 {
   flex-direction: row;
   align-items: center;
 }
+
+input:focus {
+  outline: 0;
+  border: 1px solid red;
+}

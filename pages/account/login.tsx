@@ -1,19 +1,21 @@
 import type { NextPage } from 'next';
 import { FaUser } from 'react-icons/fa';
-import { useState, useEffect, useContext, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
+import { connect } from 'react-redux';
+import { login } from '../../store/actions/auth';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/Layout';
 import styles from '@/styles/AuthForm.module.css';
 
-const LoginPage: NextPage = () => {
+const LoginPage: NextPage = ({ login, error }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ email, password });
+    login({ email, password });
   };
 
   return (
@@ -54,4 +56,8 @@ const LoginPage: NextPage = () => {
   );
 };
 
-export default LoginPage;
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+});
+
+export default connect(mapStateToProps, { login })(LoginPage);

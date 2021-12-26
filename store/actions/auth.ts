@@ -1,5 +1,4 @@
 import {} from '../types'
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { API_URL } from '@/config/index';
 

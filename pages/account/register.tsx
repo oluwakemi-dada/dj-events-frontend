@@ -1,13 +1,15 @@
 import type { NextPage } from 'next';
 import { FaUser } from 'react-icons/fa';
 import { useState, useEffect, useContext, FormEvent } from 'react';
+import { connect } from 'react-redux';
+import { register } from '../../store/actions/auth';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/Layout';
 import styles from '@/styles/AuthForm.module.css';
 
-const RegisterPage: NextPage = () => {
+const RegisterPage: NextPage = ({ register, error }) => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -19,7 +21,7 @@ const RegisterPage: NextPage = () => {
       toast.error('Passwords do not match');
       return;
     }
-    console.log({ username, email, password });
+    register({ username, email, password });
   };
 
   return (
@@ -66,7 +68,7 @@ const RegisterPage: NextPage = () => {
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
           </div>
-          <input type='submit' value='Login' className='btn' />
+          <input type='submit' value='Register' className='btn' />
         </form>
 
         <p>
@@ -78,4 +80,8 @@ const RegisterPage: NextPage = () => {
   );
 };
 
-export default RegisterPage;
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+});
+
+export default connect(mapStateToProps, { register })(RegisterPage);

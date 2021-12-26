@@ -1,7 +1,8 @@
 import {} from '../types';
 
 const initialState = {
-  loading: true,
+  user: null,
+  error: null,
 };
 
 const auth = (state = initialState, action) => {

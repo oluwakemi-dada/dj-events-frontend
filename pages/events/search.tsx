@@ -24,7 +24,11 @@ const SearchPage: NextPage<{ events: Event[] }> = ({ events }) => {
 
 export default SearchPage;
 
-export const getServerSideProps = async ({ query: { term } }) => {
+export const getServerSideProps = async ({
+  query: { term },
+}: {
+  query: { term: string };
+}) => {
   const query = qs.stringify({
     _where: {
       _or: [

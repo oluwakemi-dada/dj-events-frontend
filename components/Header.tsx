@@ -5,8 +5,12 @@ import Search from './Search';
 import { connect } from 'react-redux';
 import { login, logout } from '../store/actions/auth';
 import styles from '@/styles/Header.module.css';
+import { UserData, LogoutUser, AppState } from '../types';
 
-const Header: FC = ({ user, logout }) => {
+const Header: FC<{ user: UserData; logout: LogoutUser }> = ({
+  user,
+  logout,
+}) => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -65,7 +69,7 @@ const Header: FC = ({ user, logout }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
   user: state.auth.user,
 });
 

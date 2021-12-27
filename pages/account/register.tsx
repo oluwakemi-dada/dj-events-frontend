@@ -8,8 +8,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/Layout';
 import styles from '@/styles/AuthForm.module.css';
+import { RegisterUser, AppState } from '../../types';
 
-const RegisterPage: NextPage = ({ register, error }) => {
+const RegisterPage: NextPage<{ register: RegisterUser; error: string }> = ({
+  register,
+  error,
+}) => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -80,7 +84,7 @@ const RegisterPage: NextPage = ({ register, error }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState ) => ({
   error: state.auth.error,
 });
 

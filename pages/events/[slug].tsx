@@ -91,7 +91,11 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params: { slug } }) => {
+export const getStaticProps = async ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
   const res = await fetch(`${API_URL}/events?slug=${slug}`);
   const events = await res.json();
 

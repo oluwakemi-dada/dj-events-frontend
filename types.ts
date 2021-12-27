@@ -40,7 +40,7 @@ export interface AddEventForm {
 }
 
 export interface EditEventForm {
-  id: number;
+  id: string;
   name: string;
   performers: string;
   venue: string;
@@ -73,3 +73,50 @@ export interface PaginationProps {
   page: number;
   total: number;
 }
+
+export interface AuthReducerAction {
+  type: string;
+  payload: any;
+}
+
+export interface RegisterUserData {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export type RegisterUser = (user: RegisterUserData) => void;
+
+interface DispatchData {
+  type: string;
+  payload?: any;
+}
+
+export type DispatchType = (data: DispatchData) => void;
+
+export interface LoginUserData {
+  email: string;
+  password: string;
+}
+
+export type LoginUser = (user: LoginUserData) => void;
+
+export type LogoutUser = () => void;
+
+export type CheckUserLoggedInType = () => void;
+
+export interface UserData {
+  id: number;
+  username: string;
+  email: string;
+}
+
+export interface AppState {
+  auth: {
+    user: any;
+    error: string;
+    isAuthenticated: boolean;
+  };
+}
+
+

@@ -13,6 +13,7 @@ import { API_URL } from '@/config/index';
 import { formatDateForInput } from '@/utils/formatDate';
 import { AddEventForm, EditEventForm } from '../../../types';
 import styles from '@/styles/Form.module.css';
+import { Http2ServerRequest } from 'http2';
 
 const EditEventPage: NextPage<{ evt: EditEventForm }> = ({ evt }) => {
   const [values, setValues] = useState<AddEventForm>({
@@ -190,9 +191,17 @@ const EditEventPage: NextPage<{ evt: EditEventForm }> = ({ evt }) => {
 
 export default EditEventPage;
 
-export const getServerSideProps = async ({ params: { id } }) => {
+export const getServerSideProps = async ({
+  params: { id },
+  req,
+}: {
+  params: { id: string };
+  req: Http2ServerRequest;
+}) => {
   const res = await fetch(`${API_URL}/events/${id}`);
   const evt = await res.json();
+
+  console.log(req.headers.cookie);
 
   return {
     props: {

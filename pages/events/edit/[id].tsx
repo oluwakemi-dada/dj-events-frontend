@@ -2,6 +2,7 @@ import { FaImage } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { connect } from 'react-redux';
 import type { NextPage } from 'next';
 import { useRouter, NextRouter } from 'next/router';
 import Link from 'next/link';
@@ -11,11 +12,21 @@ import Modal from '@/components/Modal';
 import ImageUpload from '@/components/ImageUpload';
 import { API_URL } from '@/config/index';
 import { formatDateForInput } from '@/utils/formatDate';
-import { AddEventForm, EditEventForm } from '../../../types';
+import { AddEventForm, EditEventForm, AppState } from '../../../types';
 import styles from '@/styles/Form.module.css';
 import { Http2ServerRequest } from 'http2';
 
-const EditEventPage: NextPage<{ evt: EditEventForm }> = ({ evt }) => {
+const EditEventPage: NextPage<{
+  evt: EditEventForm;
+  isAuthenticated: boolean;
+}> = ({ evt, isAuthenticated }) => {
+  const router: NextRouter = useRouter();
+
+  if (!isAuthenticated) {
+    // router.push('/');
+    console.log('NOT AUTHENTICATED');
+  }
+
   const [values, setValues] = useState<AddEventForm>({
     name: evt.name,
     performers: evt.performers,
@@ -31,8 +42,6 @@ const EditEventPage: NextPage<{ evt: EditEventForm }> = ({ evt }) => {
   );
 
   const [showModal, setShowModal] = useState<boolean>(false);
-
-  const router: NextRouter = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -189,7 +198,11 @@ const EditEventPage: NextPage<{ evt: EditEventForm }> = ({ evt }) => {
   );
 };
 
-export default EditEventPage;
+const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(EditEventPage);
 
 export const getServerSideProps = async ({
   params: { id },

@@ -1,8 +1,9 @@
 import type { NextPage } from 'next';
 import { FaUser } from 'react-icons/fa';
-import { useState, useEffect, useContext, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import { register } from '../../store/actions/auth';
+import { useRouter, NextRouter } from 'next/router';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,14 +11,21 @@ import Layout from '@/components/Layout';
 import styles from '@/styles/AuthForm.module.css';
 import { RegisterUser, AppState } from '../../types';
 
-const RegisterPage: NextPage<{ register: RegisterUser; error: string }> = ({
-  register,
-  error,
-}) => {
+const RegisterPage: NextPage<{
+  register: RegisterUser;
+  error: string;
+  isAuthenticated: boolean;
+}> = ({ register, error, isAuthenticated }) => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+
+  const router: NextRouter = useRouter();
+
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,6 +35,10 @@ const RegisterPage: NextPage<{ register: RegisterUser; error: string }> = ({
     }
     register({ username, email, password });
   };
+
+  if (isAuthenticated) {
+    router.push('/account/dashboard');
+  }
 
   return (
     <Layout title='User Registration'>
@@ -84,8 +96,9 @@ const RegisterPage: NextPage<{ register: RegisterUser; error: string }> = ({
   );
 };
 
-const mapStateToProps = (state: AppState ) => ({
+const mapStateToProps = (state: AppState) => ({
   error: state.auth.error,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { register })(RegisterPage);

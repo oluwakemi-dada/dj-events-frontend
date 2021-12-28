@@ -6,7 +6,7 @@ export interface LayoutProps {
 }
 
 export interface Event {
-  id: string;
+  id: number;
   name: string;
   slug: string;
   venue: string;
@@ -119,4 +119,4 @@ export interface AppState {
   };
 }
 
-
+export type DashboardHandleDelete = (id: number) => void;

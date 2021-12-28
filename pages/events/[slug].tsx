@@ -12,7 +12,7 @@ import { DeleteEvent } from 'types';
 import { useRouter, NextRouter } from 'next/router';
 
 const EventPage: NextPage<{ evt: Event }> = ({ evt }) => {
-  const router = useRouter();
+  const router: NextRouter = useRouter();
 
   const deleteEvent: DeleteEvent = async () => {
     if (confirm('Are you sure?')) {

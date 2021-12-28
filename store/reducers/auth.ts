@@ -21,6 +21,7 @@ const auth = (state = initialState, action: AuthReducerAction) => {
 
   switch (type) {
     case LOGIN_USER:
+    case REGISTER_USER:
       return {
         ...state,
         user: payload,
@@ -32,6 +33,13 @@ const auth = (state = initialState, action: AuthReducerAction) => {
         ...state,
         user: payload,
         isAuthenticated: true,
+      };
+
+    case LOGOUT_USER:
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
       };
 
     case CLEAR_USER:

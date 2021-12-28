@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { FaUser } from 'react-icons/fa';
-import { useRouter } from 'next/router';
+import { useRouter, NextRouter } from 'next/router';
 import { useState, useEffect, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../store/actions/auth';
@@ -18,7 +18,7 @@ const LoginPage: NextPage<{
 }> = ({ login, error, isAuthenticated }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const router = useRouter();
+  const router: NextRouter = useRouter();
 
   useEffect(() => {
     error && toast.error(error);

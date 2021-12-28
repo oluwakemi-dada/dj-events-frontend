@@ -7,7 +7,7 @@ import store from 'store/store';
 import { checkUserLoggedIn } from '../store/actions/auth';
 import { CheckUserLoggedInType } from '../types';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     store.dispatch(checkUserLoggedIn());
   }, []);
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </Provider>
   );
-}
+};
 
 const makestore = () => store;
 const wrapper = createWrapper(makestore);

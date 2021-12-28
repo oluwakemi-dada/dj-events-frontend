@@ -27,7 +27,11 @@ const DashboardPage: NextPage<{ events: Event[] }> = ({ events }) => {
 
 export default DashboardPage;
 
-export async function getServerSideProps({ req }: { req: Http2ServerRequest }) {
+export const getServerSideProps = async ({
+  req,
+}: {
+  req: Http2ServerRequest;
+}) => {
   const { token } = parseCookies(req);
 
   const res = await fetch(`${API_URL}/events/me`, {
@@ -42,4 +46,4 @@ export async function getServerSideProps({ req }: { req: Http2ServerRequest }) {
   return {
     props: { events },
   };
-}
+};

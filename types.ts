@@ -121,3 +121,14 @@ export interface AppState {
 }
 
 export type DashboardHandleDelete = (id: number) => void;
+
+// MAP
+export type Coordinate = any;
+
+export interface Viewport {
+  latitude: any;
+  longitude: any;
+  width: string;
+  height: string;
+  zoom: number;
+}

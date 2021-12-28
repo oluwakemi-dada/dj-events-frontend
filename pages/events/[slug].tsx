@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
+import EventMap from '@/components/EventMap';
 import { API_URL } from '@/config/index';
 import { Event } from 'types';
 import styles from '@/styles/Event.module.css';
@@ -32,6 +33,8 @@ const EventPage: NextPage<{ evt: Event }> = ({ evt }) => {
         <p>{evt.description}</p>
         <h3>Venue: {evt.venue}</h3>
         <p>{evt.address}</p>
+
+        <EventMap evt={evt} />
 
         <Link href='/events'>
           <a className={styles.back}>{'<'} Go Back</a>

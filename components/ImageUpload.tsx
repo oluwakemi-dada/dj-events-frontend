@@ -3,13 +3,12 @@ import { API_URL } from '@/config/index';
 import { ImageUploadProps } from '../types';
 import styles from '@/styles/Form.module.css';
 
-const ImageUpload: FC<ImageUploadProps> = ({ evtId, imageUploaded }) => {
+const ImageUpload: FC<ImageUploadProps> = ({ evtId, imageUploaded, token }) => {
   const [image, setImage] = useState<any | null>(null);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement> | any) => {
     setImage(e.target.files[0]);
     console.log(e.target.files[0]);
-    
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -24,6 +23,9 @@ const ImageUpload: FC<ImageUploadProps> = ({ evtId, imageUploaded }) => {
 
     const res = await fetch(`${API_URL}/upload`, {
       method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: formData,
     });
 

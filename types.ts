@@ -67,6 +67,7 @@ export interface NextModal {
 export interface ImageUploadProps {
   evtId: string;
   imageUploaded: () => void;
+  token: string;
 }
 
 export interface PaginationProps {

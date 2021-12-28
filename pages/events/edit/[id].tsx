@@ -1,3 +1,4 @@
+import { parseCookies } from 'helpers';
 import { FaImage } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +20,8 @@ import { Http2ServerRequest } from 'http2';
 const EditEventPage: NextPage<{
   evt: EditEventForm;
   isAuthenticated: boolean;
-}> = ({ evt, isAuthenticated }) => {
+  token: string;
+}> = ({ evt, isAuthenticated, token }) => {
   const router: NextRouter = useRouter();
 
   if (!isAuthenticated) {
@@ -59,11 +61,17 @@ const EditEventPage: NextPage<{
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(values),
     });
 
     if (!res.ok) {
+      if (res.status === 403 || res.status === 401) {
+        toast.error('Unauthorized');
+        return;
+      }
+
       toast.error('Something Went Wrong');
     } else {
       const evt = await res.json();
@@ -192,7 +200,7 @@ const EditEventPage: NextPage<{
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded} />
+        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded} token={token} />
       </Modal>
     </Layout>
   );
@@ -211,14 +219,16 @@ export const getServerSideProps = async ({
   params: { id: string };
   req: Http2ServerRequest;
 }) => {
-  const res = await fetch(`${API_URL}/events/${id}`);
-  const evt = await res.json();
+  const { token } = parseCookies(req);
 
-  console.log(req.headers.cookie);
+  const res = await fetch(`${API_URL}/events/${id}`);
+
+  const evt = await res.json();
 
   return {
     props: {
       evt,
+      token,
     },
   };
 };

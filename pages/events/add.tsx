@@ -34,6 +34,7 @@ const AddEventPage: NextPage<{ token: string }> = ({ token }) => {
 
     if (hasEmptyFields) {
       toast.error('Please fill all fields');
+      return;
     }
 
     const res = await fetch(`${API_URL}/events`, {

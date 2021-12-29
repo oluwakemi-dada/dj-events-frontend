@@ -21,13 +21,8 @@ const EditEventPage: NextPage<{
   evt: EditEventForm;
   isAuthenticated: boolean;
   token: string;
-}> = ({ evt, isAuthenticated, token }) => {
+}> = ({ evt, token }) => {
   const router: NextRouter = useRouter();
-
-  if (!isAuthenticated) {
-    // router.push('/');
-    console.log('NOT AUTHENTICATED');
-  }
 
   const [values, setValues] = useState<AddEventForm>({
     name: evt.name,
@@ -200,17 +195,17 @@ const EditEventPage: NextPage<{
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded} token={token} />
+        <ImageUpload
+          evtId={evt.id}
+          imageUploaded={imageUploaded}
+          token={token}
+        />
       </Modal>
     </Layout>
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps)(EditEventPage);
+export default EditEventPage;
 
 export const getServerSideProps = async ({
   params: { id },

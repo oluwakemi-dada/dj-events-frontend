@@ -6,8 +6,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Geocode from 'react-geocode';
 
 const EventMap = ({ evt }: { evt: Event }) => {
-  const [lat, setLat] = useState<Coordinate>(null);
-  const [lng, setLng] = useState<Coordinate>(null);
+  const [lat, setLat] = useState<Coordinate>(null!);
+  const [lng, setLng] = useState<Coordinate>(null!);
   const [loading, setLoading] = useState<boolean>(true);
   const [viewport, setViewport] = useState<Viewport>({
     latitude: 40.712772,
@@ -17,8 +17,8 @@ const EventMap = ({ evt }: { evt: Event }) => {
     zoom: 12,
   });
 
-  const geoapifyKey = process.env.NEXT_PUBLIC_GEOAPIFY_MAP_API_KEY;
-  const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN;
+  const geoapifyKey: string = process.env.NEXT_PUBLIC_GEOAPIFY_MAP_API_KEY!;
+  const mapboxToken: string = process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN!;
 
   useEffect(() => {
     if (geoapifyKey && evt) {
@@ -33,14 +33,14 @@ const EventMap = ({ evt }: { evt: Event }) => {
           setViewport({ ...viewport, latitude: lat, longitude: lon });
           setLoading(false);
         })
-        .catch((error) => console.log('error', error));
+        .catch((error) => console.log('Something went wrong'));
     }
     // eslint-disable-next-line
   }, []);
 
   Geocode.setApiKey(geoapifyKey);
 
-  if (loading) return false;
+  if (loading) return <h4>Map Loading...</h4>;
 
   return (
     <ReactMapGl

@@ -5,6 +5,7 @@ export interface LayoutProps {
   children: React.ReactNode;
 }
 
+// EVENTS & DATA
 export interface Event {
   id: number;
   name: string;
@@ -26,8 +27,6 @@ export interface Event {
     };
   };
 }
-
-export type DeleteEvent = () => void;
 
 export interface AddEventForm {
   name: string;
@@ -57,6 +56,11 @@ export interface EditEventForm {
   };
 }
 
+export type DeleteEvent = () => void;
+
+export type DashboardHandleDelete = (id: number) => void;
+
+// MODAL, IMAGE UPLOADS AND PAGINATION
 export interface NextModal {
   show: boolean;
   onClose: () => void;
@@ -75,9 +79,10 @@ export interface PaginationProps {
   total: number;
 }
 
+// REDUX ACTIONS
 export interface AuthReducerAction {
   type: string;
-  payload: any;
+  payload?: any;
 }
 
 export interface RegisterUserData {
@@ -114,20 +119,18 @@ export interface UserData {
 
 export interface AppState {
   auth: {
-    user: any;
+    user: UserData;
     error: string;
     isAuthenticated: boolean;
   };
 }
 
-export type DashboardHandleDelete = (id: number) => void;
-
 // MAP
-export type Coordinate = any;
+export type Coordinate = number;
 
 export interface Viewport {
-  latitude: any;
-  longitude: any;
+  latitude: number;
+  longitude: number;
   width: string;
   height: string;
   zoom: number;

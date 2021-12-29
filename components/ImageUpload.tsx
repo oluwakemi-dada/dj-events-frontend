@@ -4,17 +4,15 @@ import { ImageUploadProps } from '../types';
 import styles from '@/styles/Form.module.css';
 
 const ImageUpload: FC<ImageUploadProps> = ({ evtId, imageUploaded, token }) => {
-  const [image, setImage] = useState<any | null>(null);
+  const [image, setImage] = useState<any>(null);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement> | any) => {
     setImage(e.target.files[0]);
-    console.log(e.target.files[0]);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
-    console.log(formData);
 
     formData.append('files', image);
     formData.append('ref', 'events');

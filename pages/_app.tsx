@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { createWrapper } from 'next-redux-wrapper';
 import store from 'store/store';
 import { checkUserLoggedIn } from '../store/actions/auth';
-import { CheckUserLoggedInType } from '../types';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {

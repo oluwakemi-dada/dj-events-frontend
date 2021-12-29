@@ -63,7 +63,7 @@ const LoginPage: NextPage<{
         </form>
 
         <p>
-          Don`&apos;`t have an account?
+          Don&apos;t have an account?
           <Link href='/account/register'> Register</Link>
         </p>
       </div>

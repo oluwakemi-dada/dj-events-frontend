@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '@/styles/EventItem.module.css';
 import { Event } from 'types';
+import { API_URL } from '../config';
 
 const EventItem: FC<{ evt: Event }> = ({ evt }) => {
   return (
@@ -11,7 +12,7 @@ const EventItem: FC<{ evt: Event }> = ({ evt }) => {
         <Image
           src={
             evt.image
-              ? `http://localhost:1337${evt.image.formats.thumbnail.url}`
+              ? `${API_URL}${evt.image.formats.thumbnail.url}`
               : '/images/event-default.png'
           }
           width={170}

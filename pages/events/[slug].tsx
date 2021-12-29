@@ -19,7 +19,7 @@ const EventPage: NextPage<{ evt: Event }> = ({ evt }) => {
         {evt.image && (
           <div className={styles.image}>
             <Image
-              src={`http://localhost:1337${evt.image.formats.medium.url}`}
+              src={`${API_URL}${evt.image.formats.medium.url}`}
               width={960}
               height={600}
               alt=''

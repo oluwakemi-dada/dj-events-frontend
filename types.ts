@@ -98,7 +98,7 @@ interface DispatchData {
   payload?: any;
 }
 
-export type DispatchType = (data: DispatchData) => void;
+export type DispatchType = (data: DispatchData ) => void 
 
 export interface LoginUserData {
   email: string;

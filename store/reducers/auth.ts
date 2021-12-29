@@ -16,7 +16,7 @@ const initialState = {
   error: null,
 };
 
-const auth = (state = initialState, action: AuthReducerAction) => {
+const auth = (state = initialState, action: AuthReducerAction | any) => {
   const { type, payload } = action;
 
   switch (type) {

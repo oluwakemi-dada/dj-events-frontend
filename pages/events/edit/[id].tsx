@@ -3,7 +3,6 @@ import { FaImage } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { connect } from 'react-redux';
 import type { NextPage } from 'next';
 import { useRouter, NextRouter } from 'next/router';
 import Link from 'next/link';
@@ -13,7 +12,7 @@ import Modal from '@/components/Modal';
 import ImageUpload from '@/components/ImageUpload';
 import { API_URL } from '@/config/index';
 import { formatDateForInput } from '@/utils/formatDate';
-import { AddEventForm, EditEventForm, AppState } from '../../../types';
+import { AddEventForm, EditEventForm } from '../../../types';
 import styles from '@/styles/Form.module.css';
 import { Http2ServerRequest } from 'http2';
 

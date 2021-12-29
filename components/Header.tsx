@@ -1,10 +1,10 @@
-import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaSignInAlt } from 'react-icons/fa';
 import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter, NextRouter } from 'next/router';
 import Search from './Search';
 import { connect } from 'react-redux';
-import { login, logout } from '../store/actions/auth';
+import { logout } from '../store/actions/auth';
 import styles from '@/styles/Header.module.css';
 import { UserData, LogoutUser, AppState } from '../types';
 

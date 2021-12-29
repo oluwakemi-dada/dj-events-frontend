@@ -1,5 +1,3 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import { Event, Coordinate, Viewport } from 'types';
 import Image from 'next/image';
@@ -35,7 +33,7 @@ const EventMap = ({ evt }: { evt: Event }) => {
           setViewport({ ...viewport, latitude: lat, longitude: lon });
           setLoading(false);
         })
-        .catch((error) => toast.error('Please check your address'));
+        .catch((error) => console.log('Please check your address'));
     }
     // eslint-disable-next-line
   }, []);
@@ -45,18 +43,15 @@ const EventMap = ({ evt }: { evt: Event }) => {
   if (loading) return <h4>Map Loading...</h4>;
 
   return (
-    <>
-      <ToastContainer />
-      <ReactMapGl
-        {...viewport}
-        mapboxApiAccessToken={mapboxToken}
-        onViewportChange={(vp: Viewport) => setViewport(vp)}
-      >
-        <Marker key={evt.id} latitude={lat} longitude={lng}>
-          <Image src='/images/pin.svg' width={30} height={30} alt='' />
-        </Marker>
-      </ReactMapGl>
-    </>
+    <ReactMapGl
+      {...viewport}
+      mapboxApiAccessToken={mapboxToken}
+      onViewportChange={(vp: Viewport) => setViewport(vp)}
+    >
+      <Marker key={evt.id} latitude={lat} longitude={lng}>
+        <Image src='/images/pin.svg' width={30} height={30} alt='' />
+      </Marker>
+    </ReactMapGl>
   );
 };
 

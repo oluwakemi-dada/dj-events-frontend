@@ -35,6 +35,12 @@ h1 {
   border-radius: 5px;
 }
 
+@media (max-width: 500px) {
+  .btn {
+    padding: 5px 20px;
+  }
+}
+
 .btn:hover {
   opacity: 0.9;
 }
@@ -74,4 +80,16 @@ h1 {
 input:focus {
   outline: 0;
   border: 1px solid red;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 25px;
+  }
 }

@@ -7,6 +7,11 @@
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
+.event > div:first-child,
+.event > div:nth-child(2) {
+  margin-right: 20px;
+}
+
 .img {
   flex: 1;
   margin: 10px;
@@ -20,9 +25,20 @@
   .event {
     flex-direction: column;
     text-align: center;
+    padding-bottom: 35px;
+    padding-top: 15px;
+  }
+
+  .event > div:first-child,
+  .event > div:nth-child(2) {
+    margin-right: 0;
   }
 
   .info {
     margin-bottom: 20px;
+  }
+
+  .info h3 {
+    font-size: 17px;
   }
 }

@@ -16,7 +16,7 @@ const DashboardEvent: FC<{ evt: Event; handleDelete: DashboardHandleDelete }> =
         <Link href={`/events/edit/${evt.id}`}>
           <a className={styles.edit}>
             <FaPencilAlt />
-            <span> Edit Event</span>
+            <span className={styles.editText}> Edit</span>
           </a>
         </Link>
         <a
@@ -24,7 +24,7 @@ const DashboardEvent: FC<{ evt: Event; handleDelete: DashboardHandleDelete }> =
           className={styles.delete}
           onClick={() => handleDelete(evt.id)}
         >
-          <FaTimes /> <span> Delete</span>
+          <FaTimes /> <span className={styles.deleteText}> Delete</span>
         </a>
       </div>
     );

@@ -2,6 +2,8 @@
 
 This is a Next.js, Redux and TypeScript project
 
+[Preview app](https://djevents-nextjs-v1.vercel.app/)
+
 Click the link for the [Strapi backend](https://github.com/oluwakemi-dada/dj-events-backend)
 
 ## Getting Started

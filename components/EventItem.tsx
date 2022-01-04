@@ -12,7 +12,7 @@ const EventItem: FC<{ evt: Event }> = ({ evt }) => {
         <Image
           src={
             evt.image
-              ? `${API_URL}${evt.image.formats.thumbnail.url}`
+              ? evt.image.formats.thumbnail.url
               : '/images/event-default.png'
           }
           width={170}

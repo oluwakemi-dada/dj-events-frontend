@@ -174,7 +174,7 @@ const EditEventPage: NextPage<{
       <h2>Event Image</h2>
       {imagePreview ? (
         <Image
-          src={`${API_URL}${imagePreview}`}
+          src={imagePreview}
           height={100}
           width={170}
           alt=''

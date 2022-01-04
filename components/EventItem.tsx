@@ -3,9 +3,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '@/styles/EventItem.module.css';
 import { Event } from 'types';
-import { API_URL } from '../config';
 
 const EventItem: FC<{ evt: Event }> = ({ evt }) => {
+  console.log(evt);
+  
   return (
     <div className={styles.event}>
       <div className={styles.img}>

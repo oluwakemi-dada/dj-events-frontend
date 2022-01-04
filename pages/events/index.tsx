@@ -8,6 +8,7 @@ import { Event } from 'types';
 
 const EventsPage: NextPage<{ events: Event[]; page: number; total: number }> =
   ({ events, page, total }) => {
+    
     return (
       <Layout>
         <h1> Events</h1>

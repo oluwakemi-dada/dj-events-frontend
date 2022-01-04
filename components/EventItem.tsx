@@ -5,8 +5,6 @@ import styles from '@/styles/EventItem.module.css';
 import { Event } from 'types';
 
 const EventItem: FC<{ evt: Event }> = ({ evt }) => {
-  console.log(evt);
-  
   return (
     <div className={styles.event}>
       <div className={styles.img}>

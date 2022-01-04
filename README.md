@@ -1,6 +1,6 @@
 # DJ Events Frontend
 
-This is a DJ events app built with Next.js, Redux and TypeScript.
+This is a DJ events app built with Next.js, Redux, TypeScript and Strapi for backend.
 
 [Preview app](https://djevents-nextjs-v1.vercel.app/)
 

@@ -1,6 +1,6 @@
 # DJ Events Frontend
 
-This is a Next.js, Redux and TypeScript project
+This is a DJ events app built with Next.js, Redux and TypeScript.
 
 [Preview app](https://djevents-nextjs-v1.vercel.app/)
 

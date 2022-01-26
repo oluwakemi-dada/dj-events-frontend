@@ -31,7 +31,7 @@ const login = async (req, res) => {
           path: '/',
         })
       );
-      
+
       res.status(200).json({ user: data.user });
     } else {
       res

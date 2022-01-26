@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { createWrapper } from 'next-redux-wrapper';
-import store from 'store/store';
+import store from 'store';
 import { checkUserLoggedIn } from '../store/actions/auth';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

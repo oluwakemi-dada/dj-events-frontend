@@ -1,61 +1,49 @@
-import {
-  REGISTER_USER,
-  LOGIN_USER,
-  LOGOUT_USER,
-  CHECK_USER_LOGGED_IN,
-  CLEAR_USER,
-  SET_ERROR,
-  CLEAR_ERROR,
-} from '../types';
+import { AuthActionTypes, AuthAction, AuthState } from '../../types/index';
 
-import { AuthReducerAction } from '../../types';
-
-const initialState = {
-  user: null,
+const initialState: AuthState = {
+  user: null!,
   isAuthenticated: false,
   error: null,
 };
 
-const auth = (state = initialState, action: AuthReducerAction | any) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case LOGIN_USER:
-    case REGISTER_USER:
+const authReducers = (state = initialState, action: AuthAction) => {
+  switch (action.type) {
+    case AuthActionTypes.LOGIN_USER:
+    case AuthActionTypes.REGISTER_USER:
       return {
         ...state,
-        user: payload,
+        user: action.payload,
         isAuthenticated: true,
       };
 
-    case CHECK_USER_LOGGED_IN:
+    case AuthActionTypes.CHECK_USER_LOGGED_IN:
       return {
         ...state,
-        user: payload,
+        user: action.payload,
         isAuthenticated: true,
       };
 
-    case LOGOUT_USER:
+    case AuthActionTypes.LOGOUT_USER:
       return {
         ...state,
         user: null,
         isAuthenticated: false,
       };
 
-    case CLEAR_USER:
+    case AuthActionTypes.CLEAR_USER:
       return {
         ...state,
         user: null,
         isAuthenticated: false,
       };
 
-    case SET_ERROR:
+    case AuthActionTypes.SET_AUTH_ERROR:
       return {
         ...state,
-        error: payload,
+        error: action.payload,
       };
 
-    case CLEAR_ERROR:
+    case AuthActionTypes.CLEAR_AUTH_ERROR:
       return {
         ...state,
         error: null,
@@ -66,4 +54,4 @@ const auth = (state = initialState, action: AuthReducerAction | any) => {
   }
 };
 
-export default auth;
+export default authReducers;

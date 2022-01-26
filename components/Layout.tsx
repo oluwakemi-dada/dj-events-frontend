@@ -1,11 +1,17 @@
 import { FC } from 'react';
 import Head from 'next/head';
 import { useRouter, NextRouter } from 'next/router';
-import { LayoutProps } from '../types';
 import Header from './Header';
 import Footer from './Footer';
 import Showcase from './Showcase';
 import styles from '@/styles/Layout.module.css';
+
+interface LayoutProps {
+  title?: string;
+  keywords?: string;
+  description?: string;
+  children: React.ReactNode;
+}
 
 const Layout: FC<LayoutProps> = ({
   title,

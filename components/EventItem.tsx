@@ -2,9 +2,13 @@ import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '@/styles/EventItem.module.css';
-import { Event } from 'types';
+import { Event } from '../types/index';
 
-const EventItem: FC<{ evt: Event }> = ({ evt }) => {
+interface EventItemProps {
+  evt: Event;
+}
+
+const EventItem: FC<EventItemProps> = ({ evt }) => {
   return (
     <div className={styles.event}>
       <div className={styles.img}>

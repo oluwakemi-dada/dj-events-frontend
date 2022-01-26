@@ -1,7 +1,11 @@
 import React, { FC, Fragment } from 'react';
 import Link from 'next/link';
-import { PaginationProps } from '../types';
 import { PER_PAGE } from '@/config/index';
+
+interface PaginationProps {
+  page: number;
+  total: number;
+}
 
 const Pagination: FC<PaginationProps> = ({ page, total }) => {
   const lastPage = Math.ceil(total / PER_PAGE);

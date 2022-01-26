@@ -2,20 +2,22 @@ import { FaSignInAlt } from 'react-icons/fa';
 import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter, NextRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
 import Search from './Search';
-import { connect } from 'react-redux';
 import { logout } from '../store/actions/auth';
 import styles from '@/styles/Header.module.css';
 import { UserData, LogoutUser, AppState } from '../types';
+import { AppDispatch } from '../store';
+import { ReduxState } from '../types/index';
 
-const Header: FC<{ user: UserData; logout: LogoutUser }> = ({
-  user,
-  logout,
-}) => {
+const Header: FC = () => {
   const router: NextRouter = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const user = useSelector((state: ReduxState) => state.auth.user);
 
   const onLogout = () => {
-    logout();
+    dispatch(logout());
     router.push('/');
   };
   return (
@@ -73,8 +75,4 @@ const Header: FC<{ user: UserData; logout: LogoutUser }> = ({
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  user: state.auth.user,
-});
-
-export default connect(mapStateToProps, { logout })(Header);
+export default Header;

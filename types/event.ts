@@ -47,3 +47,5 @@ export interface EditEventForm {
     };
   };
 }
+
+export type DashboardHandleDelete = (id: number) => void;

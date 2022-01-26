@@ -2,9 +2,15 @@ import React, { FC, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { FaTimes } from 'react-icons/fa';
 import styles from '@/styles/Modal.module.css';
-import { NextModal } from 'types';
 
-const Modal: FC<NextModal> = ({ show, onClose, children, title }) => {
+export interface ModalProps {
+  show: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  title?: string;
+}
+
+const Modal: FC<ModalProps> = ({ show, onClose, children, title }) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => setIsBrowser(true), []);

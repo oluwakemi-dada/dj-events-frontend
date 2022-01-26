@@ -1,11 +1,15 @@
-import { useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Event, Coordinate, Viewport } from 'types';
 import Image from 'next/image';
 import ReactMapGl, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Geocode from 'react-geocode';
 
-const EventMap = ({ evt }: { evt: Event }) => {
+interface EventMapProps {
+  evt: Event;
+}
+
+const EventMap: FC<EventMapProps> = ({ evt }) => {
   const [lat, setLat] = useState<Coordinate>(null!);
   const [lng, setLng] = useState<Coordinate>(null!);
   const [loading, setLoading] = useState<boolean>(true);

@@ -1,7 +1,12 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react';
 import { API_URL } from '@/config/index';
-import { ImageUploadProps } from '../types';
 import styles from '@/styles/Form.module.css';
+
+interface ImageUploadProps {
+  evtId: string;
+  imageUploaded: () => void;
+  token: string;
+}
 
 const ImageUpload: FC<ImageUploadProps> = ({ evtId, imageUploaded, token }) => {
   const [image, setImage] = useState<any>(null);

@@ -7,11 +7,15 @@ import { useRouter, NextRouter } from 'next/router';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { API_URL } from '@/config/index';
-import { AddEventForm } from '../../types';
+import { AddEventForm } from '../../types/index';
 import styles from '@/styles/Form.module.css';
 import { Http2ServerRequest } from 'http2';
 
-const AddEventPage: NextPage<{ token: string }> = ({ token }) => {
+interface AddEventPageProps {
+  token: string;
+}
+
+const AddEventPage: NextPage<AddEventPageProps> = ({ token }) => {
   const [values, setValues] = useState<AddEventForm>({
     name: '',
     performers: '',
@@ -154,11 +158,11 @@ const AddEventPage: NextPage<{ token: string }> = ({ token }) => {
 
 export default AddEventPage;
 
-export const getServerSideProps = async ({
-  req,
-}: {
+interface ServerSidePropsTypes {
   req: Http2ServerRequest;
-}) => {
+}
+
+export const getServerSideProps = async ({ req }: ServerSidePropsTypes) => {
   const { token } = parseCookies(req);
   return {
     props: {

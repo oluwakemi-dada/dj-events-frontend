@@ -4,10 +4,14 @@ import Link from 'next/link';
 import Layout from '@/components/Layout';
 import EventMap from '@/components/EventMap';
 import { API_URL } from '@/config/index';
-import { Event } from 'types';
+import { Event } from '../../types/index';
 import styles from '@/styles/Event.module.css';
 
-const EventPage: NextPage<{ evt: Event }> = ({ evt }) => {
+interface EventPageProps {
+  evt: Event;
+}
+
+const EventPage: NextPage<EventPageProps> = ({ evt }) => {
   return (
     <Layout>
       <div className={styles.event}>
@@ -76,11 +80,13 @@ export default EventPage;
 //   };
 // };
 
+interface ServerSidePropsTypes {
+  query: { slug: string };
+}
+
 export const getServerSideProps = async ({
   query: { slug },
-}: {
-  query: { slug: string };
-}) => {
+}: ServerSidePropsTypes) => {
   const res = await fetch(`${API_URL}/events?slug=${slug}`);
   const events = await res.json();
 

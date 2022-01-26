@@ -9,6 +9,8 @@ export interface LoginUserData {
   password: string;
 }
 
+export type LoginUser = (user: LoginUserData) => void;
+
 export interface User {
   id: number;
   username: string;

@@ -2,23 +2,26 @@ import type { NextPage } from 'next';
 import { FaUser } from 'react-icons/fa';
 import { useRouter, NextRouter } from 'next/router';
 import { useState, useEffect, FormEvent } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../store/actions/auth';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/Layout';
 import styles from '@/styles/AuthForm.module.css';
-import { LoginUser, AppState } from '../../types';
+import { AppDispatch } from 'store';
+import { ReduxState } from '../../types/index';
 
-const LoginPage: NextPage<{
-  login: LoginUser;
-  error: string;
-  isAuthenticated: boolean;
-}> = ({ login, error, isAuthenticated }) => {
+const LoginPage: NextPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const router: NextRouter = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const error = useSelector((state: ReduxState) => state.auth.error);
+  const isAuthenticated = useSelector(
+    (state: ReduxState) => state.auth.isAuthenticated
+  );
 
   useEffect(() => {
     error && toast.error(error);
@@ -26,7 +29,7 @@ const LoginPage: NextPage<{
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login({ email, password });
+    dispatch(login({ email, password }));
   };
 
   if (isAuthenticated) {
@@ -71,9 +74,4 @@ const LoginPage: NextPage<{
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  error: state.auth.error,
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { login })(LoginPage);
+export default LoginPage;

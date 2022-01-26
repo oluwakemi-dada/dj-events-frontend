@@ -1,27 +1,29 @@
 import type { NextPage } from 'next';
 import { FaUser } from 'react-icons/fa';
 import { useState, useEffect, FormEvent } from 'react';
-import { connect } from 'react-redux';
 import { register } from '../../store/actions/auth';
 import { useRouter, NextRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/Layout';
 import styles from '@/styles/AuthForm.module.css';
-import { RegisterUser, AppState } from '../../types';
+import { AppDispatch } from 'store';
+import { ReduxState } from '../../types/index';
 
-const RegisterPage: NextPage<{
-  register: RegisterUser;
-  error: string;
-  isAuthenticated: boolean;
-}> = ({ register, error, isAuthenticated }) => {
+const RegisterPage: NextPage = () => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-
   const router: NextRouter = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const error = useSelector((state: ReduxState) => state.auth.error);
+  const isAuthenticated = useSelector(
+    (state: ReduxState) => state.auth.isAuthenticated
+  );
 
   useEffect(() => {
     error && toast.error(error);
@@ -33,7 +35,7 @@ const RegisterPage: NextPage<{
       toast.error('Passwords do not match');
       return;
     }
-    register({ username, email, password });
+    dispatch(register({ username, email, password }));
   };
 
   if (isAuthenticated) {
@@ -96,9 +98,4 @@ const RegisterPage: NextPage<{
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  error: state.auth.error,
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { register })(RegisterPage);
+export default RegisterPage;

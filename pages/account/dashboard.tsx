@@ -6,14 +6,16 @@ import { API_URL } from '@/config/index';
 import { useRouter, NextRouter } from 'next/router';
 import { parseCookies } from 'helpers';
 import { Http2ServerRequest } from 'http2';
-import { Event } from '../../types';
+import { Event } from '../../types/index';
 import DashboardEvent from '@/components/DashboardEvent';
 import styles from '@/styles/Dashboard.module.css';
 
-const DashboardPage: NextPage<{ events: Event[]; token: string }> = ({
-  events,
-  token,
-}) => {
+interface DashboardPageProps {
+  events: Event[];
+  token: string;
+}
+
+const DashboardPage: NextPage<DashboardPageProps> = ({ events, token }) => {
   const router: NextRouter = useRouter();
 
   const deleteEvent = async (id: number) => {
@@ -52,11 +54,11 @@ const DashboardPage: NextPage<{ events: Event[]; token: string }> = ({
 
 export default DashboardPage;
 
-export const getServerSideProps = async ({
-  req,
-}: {
+interface ServerSidePropsTypes {
   req: Http2ServerRequest;
-}) => {
+}
+
+export const getServerSideProps = async ({ req }: ServerSidePropsTypes) => {
   const { token } = parseCookies(req);
 
   const res = await fetch(`${API_URL}/events/me`, {

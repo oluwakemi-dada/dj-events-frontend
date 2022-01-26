@@ -12,15 +12,16 @@ import Modal from '@/components/Modal';
 import ImageUpload from '@/components/ImageUpload';
 import { API_URL } from '@/config/index';
 import { formatDateForInput } from '@/utils/formatDate';
-import { AddEventForm, EditEventForm } from '../../../types';
+import { AddEventForm, EditEventForm } from '../../../types/index';
 import styles from '@/styles/Form.module.css';
 import { Http2ServerRequest } from 'http2';
 
-const EditEventPage: NextPage<{
+interface EditEventPageProps {
   evt: EditEventForm;
-  isAuthenticated: boolean;
   token: string;
-}> = ({ evt, token }) => {
+}
+
+const EditEventPage: NextPage<EditEventPageProps> = ({ evt, token }) => {
   const router: NextRouter = useRouter();
 
   const [values, setValues] = useState<AddEventForm>({
@@ -173,12 +174,7 @@ const EditEventPage: NextPage<{
       </form>
       <h2>Event Image</h2>
       {imagePreview ? (
-        <Image
-          src={imagePreview}
-          height={100}
-          width={170}
-          alt=''
-        />
+        <Image src={imagePreview} height={100} width={170} alt='' />
       ) : (
         <div>
           <p>No image uploaded</p>
@@ -206,13 +202,15 @@ const EditEventPage: NextPage<{
 
 export default EditEventPage;
 
+interface ServerSidePropsTypes {
+  params: { id: string };
+  req: Http2ServerRequest;
+}
+
 export const getServerSideProps = async ({
   params: { id },
   req,
-}: {
-  params: { id: string };
-  req: Http2ServerRequest;
-}) => {
+}: ServerSidePropsTypes) => {
   const { token } = parseCookies(req);
 
   const res = await fetch(`${API_URL}/events/${id}`);

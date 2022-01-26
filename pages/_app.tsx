@@ -5,11 +5,15 @@ import { Provider } from 'react-redux';
 import { createWrapper } from 'next-redux-wrapper';
 import store from 'store';
 import { checkUserLoggedIn } from '../store/actions/auth';
+import { AppDispatch } from 'store';
+import { useDispatch } from 'react-redux';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+  
   useEffect(() => {
-    store.dispatch(checkUserLoggedIn());
-  }, []);
+    dispatch(checkUserLoggedIn());
+  }, [dispatch]);
 
   return (
     <Provider store={store}>

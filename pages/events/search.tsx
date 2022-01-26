@@ -5,9 +5,13 @@ import Link from 'next/link';
 import Layout from '@/components/Layout';
 import EventItem from '@/components/EventItem';
 import { API_URL } from '@/config/index';
-import { Event } from 'types';
+import { Event } from '../../types/index';
 
-const SearchPage: NextPage<{ events: Event[] }> = ({ events }) => {
+interface SearchPageProps {
+  events: Event[];
+}
+
+const SearchPage: NextPage<SearchPageProps> = ({ events }) => {
   const router: NextRouter = useRouter();
 
   return (
@@ -24,11 +28,13 @@ const SearchPage: NextPage<{ events: Event[] }> = ({ events }) => {
 
 export default SearchPage;
 
+interface ServerSidePropsTypes {
+  query: { term: string };
+}
+
 export const getServerSideProps = async ({
   query: { term },
-}: {
-  query: { term: string };
-}) => {
+}: ServerSidePropsTypes) => {
   const query = qs.stringify({
     _where: {
       _or: [

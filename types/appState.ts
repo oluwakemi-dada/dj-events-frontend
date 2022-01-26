@@ -1,5 +1,5 @@
-import { Auth } from './index';
+import { AuthState } from './index';
 
 export interface ReduxState {
-  auth: Auth;
+  auth: AuthState;
 }

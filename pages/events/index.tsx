@@ -3,24 +3,27 @@ import Layout from '@/components/Layout';
 import EventItem from '@/components/EventItem';
 import Pagination from '@/components/Pagination';
 import { API_URL, PER_PAGE } from '@/config/index';
+import { Event } from '../../types/index';
 
-import { Event } from 'types';
+interface EventsPageProps {
+  events: Event[];
+  page: number;
+  total: number;
+}
 
-const EventsPage: NextPage<{ events: Event[]; page: number; total: number }> =
-  ({ events, page, total }) => {
-    
-    return (
-      <Layout>
-        <h1> Events</h1>
-        {events.length === 0 && <h3>No events to show</h3>}
-        {events.map((evt) => (
-          <EventItem key={evt.id} evt={evt} />
-        ))}
+const EventsPage: NextPage<EventsPageProps> = ({ events, page, total }) => {
+  return (
+    <Layout>
+      <h1> Events</h1>
+      {events.length === 0 && <h3>No events to show</h3>}
+      {events.map((evt) => (
+        <EventItem key={evt.id} evt={evt} />
+      ))}
 
-        <Pagination page={page} total={total} />
-      </Layout>
-    );
-  };
+      <Pagination page={page} total={total} />
+    </Layout>
+  );
+};
 
 export default EventsPage;
 

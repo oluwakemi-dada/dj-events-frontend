@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Search from './Search';
 import { logout } from '../store/actions/auth';
 import styles from '@/styles/Header.module.css';
-import { UserData, LogoutUser, AppState } from '../types';
 import { AppDispatch } from '../store';
 import { ReduxState } from '../types/index';
 

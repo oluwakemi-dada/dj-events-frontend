@@ -1,9 +1,19 @@
 import { FC, useState, useEffect } from 'react';
-import { Event, Coordinate, Viewport } from 'types';
+import { Event } from 'types/index';
 import Image from 'next/image';
 import ReactMapGl, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Geocode from 'react-geocode';
+
+export type Coordinate = number;
+
+export interface Viewport {
+  latitude: number;
+  longitude: number;
+  width: string;
+  height: string;
+  zoom: number;
+}
 
 interface EventMapProps {
   evt: Event;
